@@ -1,0 +1,119 @@
+>cd e:
+>cd miaov/testGit
+>git clone http://github.com/ghostdp.git(回车执行) 克隆到本地
+
+设置贡献者
+ - name
+ - email
+ git config --global user.name
+ git config --global user.email
+ git config --list
+
+>cd drag(要进入项目才可以进行创建贡献者)
+
+讲下master
+>drag [master]> master是项目主分支的名字
+
+Git的三个区
+工作区（工作当中编写代码存放的地方）
+暂存区
+	作为过滤层
+	避免误操作
+	保护工作区和版本区
+	分支处理
+版本区（库）
+	master（版本）
+
+
+Git命令
+	\drag [master +2 ~0 -0 !]>(master后面红色的文字表示
+在工作区有两个新增加的文件，0个修改，0个删除)
+	git status 查看工作区状态
+	git add 提交到暂存区
+     		\drag [master +1 ~0 -0 | +1 ~0 -0]>git add drag.html
+		现在的master里分成了两组，绿色的表示暂存区（个文件上传到暂存
+		区，0个修改，0个删除），红色表示工作区(1个文件上传到暂存区 0个修改 0个删除)，
+		\drag [master +2 ~0 -0]>git add drag.js
+		现在的master里只有一组，表示全部上传到了暂存区
+	git commit 提交到版本区
+	>git commit -m "change drag html" 直接写注释，不用打开记事本了
+	>git commit -a -m "add drag.js" 直接连着写可以从工作区到暂存区到版本区
+	>git log 查看提交历史，可以按回车查看之前更多的版本。按Q退出
+	
+	对比
+	>git diff 工作区与暂存区的对比
+	>git diff --cached(--staged) 暂存区与版本区的对比
+	>git diff master 工作区与版本区之间的对比
+
+	撤销操作
+	>git reset HEAD drag.js  从暂存区撤销回到工作区
+	>git checkout -- drag.js 从版本区撤销回到版本区
+	>git commit -m "change3 drag.js and demo.html" --amend 已经提交到了版本区drag.js，忘记提交html,
+		可以通过amend将js撤回 并将两个一次提交到版本区
+
+	删除命令
+	>git rm drag.html 删除暂存区的文件（工作区与暂存区都有drag.html文件的
+		时候，执行rm命令会出错）
+	>git rm -f drag.html(可以用-f 修饰符将工作区与暂存区都删除掉)
+	>git rm --cached drag.html(可以使用--cached 修饰符将暂存区的删掉，工作区不会删除)
+
+	恢复命令（从版本区恢复）
+	>git checkout commit_id file_name （一个文件）当提交到版本区的文件有bug。想撤回到之前
+		任意一本版本，可以>git log 查看所有提交的版本， 然后截取部分id, 
+		然后git checkout commit_id file_name 恢复到上一个版本
+	>git reset --hard commit_id （一个版本） 所有文件恢复到commit_id的版本
+			  HEAD^ head指针往历史版本走
+			  HEAD~num head指针跳过指定的数的历史版本往回走
+	>git reflog （记录每一次的操作行为）通过reflog可以查看历史版本操作，
+			并通过commit_id信息，可以恢复到任意版本
+
+	同步到远程仓库
+	>git remote 查看远程仓库的名字
+	>git remote -v 查看远程仓库的地址
+	>git push origin(仓库名字) master(分支)  远程推送到仓库
+
+      	多人协作解决冲突
+	>git fetch 同步更新
+		>Git diff master origin/master
+		>Git merge origin/master
+	>git pull 同步更新
+
+	
+	分支处理
+	>git branch 查看分支
+	>git branch new1 创建了一个new1的分支
+	>git checkout new1 切换到new1这个分支上
+	>git checkout -b new2 创建new2的分支，并切换到new2分支上
+	>git merge new1 切换到主分支，然后通过merge 合并
+		ps:当合并分支的时候，出现冲突，可通过status查看
+		冲突文件，并修改后再提交到版本区
+	>git branch --merged 切换到主分支下，查看已经合并了的分支
+	>git branch --no-merged 切换到主分支下，查看未合并的分支
+	>git branch -d new1 删除 new1 分支
+	>git branch -D new2 强行删除未合并的分支
+
+	添加标签
+	>git tag 查看标签
+	>git tag name 添加标签
+
+	创建组织
+
+	创建博客
+		github上创建
+		https://page.github.com
+		注意格式的正确性
+		博客名要与创建者名字相同 label23.github.io
+		首页的名字 index.html
+
+	总结
+		资源
+		http://git.oschina.net/progit/
+		http://www.liaoxuefeng.com
+
+
+
+
+
+
+
+
